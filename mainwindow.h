@@ -107,6 +107,10 @@ private slots:
 
     void on_loadButton_clicked();
 
+    void on_newButton_pressed();
+
+    void on_newButton_released();
+
 private:
     Ui::MainWindow *ui;
 };

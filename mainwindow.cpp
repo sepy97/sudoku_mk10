@@ -1134,3 +1134,13 @@ void MainWindow::on_loadButton_clicked()
         sixteenSudokuLoad();
     }
 }
+
+void MainWindow::on_newButton_pressed()
+{
+    ui->newButton->setText(QString("Rendering..."));
+}
+
+void MainWindow::on_newButton_released()
+{
+    ui->newButton->setText(QString("New game"));
+}

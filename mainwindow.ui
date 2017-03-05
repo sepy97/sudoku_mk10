@@ -46,9 +46,9 @@
     </property>
     <property name="font">
      <font>
-      <family>Apple Chancery</family>
+      <family>Copperplate</family>
       <pointsize>24</pointsize>
-      <italic>true</italic>
+      <italic>false</italic>
      </font>
     </property>
     <property name="text">
@@ -66,9 +66,9 @@
     </property>
     <property name="font">
      <font>
-      <family>Apple Chancery</family>
+      <family>Copperplate</family>
       <pointsize>24</pointsize>
-      <italic>true</italic>
+      <italic>false</italic>
      </font>
     </property>
     <property name="text">
@@ -86,10 +86,10 @@
     </property>
     <property name="font">
      <font>
-      <family>Apple Chancery</family>
+      <family>Copperplate</family>
       <pointsize>24</pointsize>
       <weight>50</weight>
-      <italic>true</italic>
+      <italic>false</italic>
       <bold>false</bold>
      </font>
     </property>
@@ -110,7 +110,7 @@
      <number>2</number>
     </property>
     <property name="maximum">
-     <number>35</number>
+     <number>50</number>
     </property>
     <property name="singleStep">
      <number>1</number>
@@ -142,9 +142,9 @@
     </property>
     <property name="font">
      <font>
-      <family>Apple Chancery</family>
+      <family>Copperplate</family>
       <pointsize>25</pointsize>
-      <italic>true</italic>
+      <italic>false</italic>
      </font>
     </property>
     <property name="text">
@@ -165,9 +165,9 @@
     </property>
     <property name="font">
      <font>
-      <family>Apple Chancery</family>
+      <family>Copperplate</family>
       <pointsize>24</pointsize>
-      <italic>true</italic>
+      <italic>false</italic>
      </font>
     </property>
     <property name="text">
@@ -3230,10 +3230,10 @@
     </property>
     <property name="font">
      <font>
-      <family>Apple Chancery</family>
+      <family>Copperplate</family>
       <pointsize>24</pointsize>
       <weight>50</weight>
-      <italic>true</italic>
+      <italic>false</italic>
       <bold>false</bold>
      </font>
     </property>
@@ -3252,10 +3252,10 @@
     </property>
     <property name="font">
      <font>
-      <family>Apple Chancery</family>
+      <family>Copperplate</family>
       <pointsize>24</pointsize>
       <weight>50</weight>
-      <italic>true</italic>
+      <italic>false</italic>
       <bold>false</bold>
      </font>
     </property>
