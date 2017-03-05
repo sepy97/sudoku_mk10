@@ -6,11 +6,13 @@
 int hardlevel = 2;
 nineDatabase* newbase;
 nineTable* newtbl;
+nineTable* restbl;
 int numbers = 0;
 int num[9] = {0,0,0,0,0,0,0,0,0};
 
 sixteenDatabase* newbase_16;
 sixteenTable* newtbl_16;
+sixteenTable* restbl_16;
 int numbers_16 = 0;
 int num_16[16] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
@@ -44,6 +46,7 @@ void MainWindow::on_newButton_clicked()
 
         ui->sudokuWidget->clear();
         newtbl = new nineTable;
+        restbl = new nineTable;
         newbase = new nineDatabase;
 
         for (int i = 0; i < newtbl->bodySize; i++)
@@ -55,6 +58,7 @@ void MainWindow::on_newButton_clicked()
             }
         }
         newtbl->sudokuGen (&hardlevel);
+        restbl->sudokuCopy(newtbl, restbl);
 
         for (int i = 0; i < newtbl->bodySize; i++)
         {
@@ -75,7 +79,7 @@ void MainWindow::on_newButton_clicked()
                 }
             }
         }
-        newbase->renderingSolutions(newtbl);
+        newbase->renderingSolutions(restbl);
     }
     else if (ui->tabWidget->currentIndex() == 1)
     {
@@ -88,6 +92,7 @@ void MainWindow::on_newButton_clicked()
 
         ui->sudokuWidget_16->clear();
         newtbl_16 = new sixteenTable;
+        restbl_16 = new sixteenTable;
         newbase_16 = new sixteenDatabase;
         for (int i = 0; i < newtbl_16->bodySize; i++)
         {
@@ -98,6 +103,7 @@ void MainWindow::on_newButton_clicked()
             }
         }
         newtbl_16->sudokuGen (&hardlevel);
+        restbl_16->sudokuCopy(newtbl_16, restbl_16);
 
         for (int i = 0; i < newtbl_16->bodySize; i++)
         {
@@ -118,7 +124,7 @@ void MainWindow::on_newButton_clicked()
                 }
             }
         }
-        newbase_16->renderingSolutions(newtbl_16);
+        newbase_16->renderingSolutions(restbl_16);
     }
 }
 
@@ -915,11 +921,20 @@ int MainWindow::nineSudokuSave()
             for(int j = 0; j < newtbl->bodySize; j++)
             {
                 bool ok = true;
-                s += ui->sudokuWidget->item(i,j)->text().toInt(&ok, 10);// [i][j][0];
+                s += ui->sudokuWidget->item(i,j)->text().toInt(&ok, 10);//
             }
         }
 
         fout << s*newtbl->bodySize << "\n" << newtbl->bodySize << newtbl->bodySize << "\n" ;//<< newtbl-> << "\n";
+
+        for (int i = 0; i < newtbl->bodySize; i++)
+        {
+            for (int j = 0; j < newtbl->bodySize; j++)
+            {
+                fout << newtbl->body[i][j][0] << " ";
+            }
+            fout <<"\n";
+        }
 
         for (int i = 0; i < newtbl->bodySize; i++)
         {
@@ -955,6 +970,7 @@ int MainWindow::nineSudokuLoad()
         }
         ui->sudokuWidget->clear();
         newtbl = new nineTable;
+        restbl = new nineTable;
         newbase = new nineDatabase;
 
         for (int i = 0; i < newtbl->bodySize; i++)
@@ -962,8 +978,35 @@ int MainWindow::nineSudokuLoad()
             for (int j = 0; j < newtbl->bodySize; j++)
             {
                 fin >> k;
-                sum += k;
                 newtbl->body[i][j].push_back(k);
+            }
+        }
+
+        for (int i = 0; i < newtbl->bodySize; i++)
+        {
+            for (int j = 0; j < newtbl->bodySize; j++)
+            {
+                fin >> k;
+                sum += k;
+                QTableWidgetItem *item = new QTableWidgetItem();
+
+                if (k != 0)
+                {
+                    numbers++;
+                    QString tmp2 = QString::number (k);
+                    QString nothingstr = "0";
+                    insertNumber (nothingstr, tmp2);
+                    item->setText (tmp2);
+                    ui->sudokuWidget->setItem (i, j, item);
+                    if (newtbl->body[i][j][0] != 0)
+                    {
+                        ui->sudokuWidget->item (i, j)->setFlags (Qt::NoItemFlags);
+                    }
+                }
+                else
+                {
+                    ui->sudokuWidget->setItem (i, j, item);
+                }
             }
         }
 
@@ -976,30 +1019,8 @@ int MainWindow::nineSudokuLoad()
         fin >> hardlevel;
         ui->hardLevelSlider->setSliderPosition (hardlevel);
 
-        for (int i = 0; i < newtbl->bodySize; i++)
-        {
-            for (int j = 0; j < newtbl->bodySize; j++)
-            {
-                QTableWidgetItem *item = new QTableWidgetItem();
-
-                int tmp = newtbl->body[i][j][0];
-                if (tmp != 0)
-                {
-                    numbers++;
-                    QString tmp2 = QString::number (tmp);
-                    QString nothingstr = "0";
-                    insertNumber (nothingstr, tmp2);
-                    item->setText (tmp2);
-                    ui->sudokuWidget->setItem (i, j, item);
-                    ui->sudokuWidget->item (i, j)->setFlags (Qt::NoItemFlags);
-                }
-                else
-                {
-                    ui->sudokuWidget->setItem (i, j, item);
-                }
-            }
-        }
-        newbase->renderingSolutions(newtbl);
+        restbl->sudokuCopy(newtbl, restbl);
+        newbase->renderingSolutions(restbl);
 
         fin.close();
     }
@@ -1027,6 +1048,14 @@ int MainWindow::sixteenSudokuSave()
 
         fout << s*newtbl_16->bodySize << "\n" << newtbl_16->bodySize << newtbl_16->bodySize << "\n" ;//<< newtbl-> << "\n";
 
+        for (int i = 0; i < newtbl_16->bodySize; i++)
+        {
+            for (int j = 0; j < newtbl_16->bodySize; j++)
+            {
+                fout << newtbl_16->body[i][j][0] << " ";
+            }
+            fout <<"\n";
+        }
         for (int i = 0; i < newtbl_16->bodySize; i++)
         {
             for (int j = 0; j < newtbl_16->bodySize; j++)
@@ -1061,6 +1090,7 @@ int MainWindow::sixteenSudokuLoad()
         }
         ui->sudokuWidget_16->clear();
         newtbl_16 = new sixteenTable;
+        restbl_16 = new sixteenTable;
         newbase_16 = new sixteenDatabase;
 
         for (int i = 0; i < newtbl_16->bodySize; i++)
@@ -1068,8 +1098,35 @@ int MainWindow::sixteenSudokuLoad()
             for (int j = 0; j < newtbl_16->bodySize; j++)
             {
                 fin >> k;
-                sum += k;
                 newtbl_16->body[i][j].push_back(k);
+            }
+        }
+
+        for (int i = 0; i < newtbl_16->bodySize; i++)
+        {
+            for (int j = 0; j < newtbl_16->bodySize; j++)
+            {
+                fin >> k;
+                sum += k;
+                QTableWidgetItem *item = new QTableWidgetItem();
+
+                if (k != 0)
+                {
+                    numbers_16++;
+                    QString tmp2 = QString::number (k);
+                    QString nothingstr = "0";
+                    insertNumber_16 (nothingstr, tmp2);
+                    item->setText (tmp2);
+                    ui->sudokuWidget_16->setItem (i, j, item);
+                    if (newtbl_16->body[i][j][0] != 0)
+                    {
+                        ui->sudokuWidget_16->item (i, j)->setFlags (Qt::NoItemFlags);
+                    }
+                }
+                else
+                {
+                    ui->sudokuWidget_16->setItem (i, j, item);
+                }
             }
         }
 
@@ -1081,30 +1138,8 @@ int MainWindow::sixteenSudokuLoad()
         fin >> hardlevel;
         ui->hardLevelSlider->setSliderPosition (hardlevel);
 
-        for (int i = 0; i < newtbl_16->bodySize; i++)
-        {
-            for (int j = 0; j < newtbl_16->bodySize; j++)
-            {
-                QTableWidgetItem *item = new QTableWidgetItem();
-
-                int tmp = newtbl_16->body[i][j][0];
-                if (tmp != 0)
-                {
-                    numbers_16++;
-                    QString tmp2 = QString::number (tmp);
-                    QString nothingstr = "0";
-                    insertNumber_16 (nothingstr, tmp2);
-                    item->setText (tmp2);
-                    ui->sudokuWidget_16->setItem (i, j, item);
-                    ui->sudokuWidget_16->item (i, j)->setFlags (Qt::NoItemFlags);
-                }
-                else
-                {
-                    ui->sudokuWidget_16->setItem (i, j, item);
-                }
-            }
-        }
-        newbase_16->renderingSolutions(newtbl_16);
+        restbl_16->sudokuCopy(newtbl_16, restbl_16);
+        newbase_16->renderingSolutions(restbl_16);
 
         fin.close();
     }
