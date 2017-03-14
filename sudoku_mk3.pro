@@ -4,9 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
-
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+ QT += widgets
 
 TARGET = sudoku_mk2
 TEMPLATE = app
@@ -38,10 +36,3 @@ DISTFILES += \
     sudokuTemplate.txt \
     sudokuTemplate_16.txt
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../build-sudoku_mk3-Desktop_Qt_5_8_0_clang_64bit-Release/release/ -lQtWidgets
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../build-sudoku_mk3-Desktop_Qt_5_8_0_clang_64bit-Release/debug/ -lQtWidgets
-else:mac: LIBS += -F$$PWD/../build-sudoku_mk3-Desktop_Qt_5_8_0_clang_64bit-Release/ -framework QtWidgets
-else:unix: LIBS += -L$$PWD/../build-sudoku_mk3-Desktop_Qt_5_8_0_clang_64bit-Release/ -lQtWidgets
-
-INCLUDEPATH += $$PWD/../build-sudoku_mk3-Desktop_Qt_5_8_0_clang_64bit-Release
-DEPENDPATH += $$PWD/../build-sudoku_mk3-Desktop_Qt_5_8_0_clang_64bit-Release
