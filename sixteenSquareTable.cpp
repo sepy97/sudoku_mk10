@@ -129,7 +129,7 @@ int sixteenTable::sudokuSwap ()    //особый путь перемешива�
 
 int sixteenTable::sudokuShuffle () //используются перемешивания столбцов и зон в случайном порядке
 {
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < 30; i++)
     {
         int funcnum = rand();
         funcnum %= 2;
@@ -169,15 +169,6 @@ sixteenTable* sixteenTable::sudokuCtor ()
 
 int sixteenTable::sudokuScan (string input)     //создание таблицы судоку из строки чисел, роль пустых клеток играет '0'
 {
-    /*for (int i = 0; i < this->bodySize; i++)
-    {
-        for (int j = 0; j < this->bodySize; j++)
-        {
-            this->body[i][j].push_back( input[i*this->bodySize+j]-'0');
-            //this->body[i][j][0] = input[i*this->bodySize+j]-'0';
-        }
-    }*/
-    
     stringstream ss(input);
     string item;
     for (int i = 0; i < this->bodySize; i++)
@@ -548,13 +539,13 @@ int sixteenTable::sudokuGen (int* level)   //генерация поля суд�
 {
     srand(time(0));
     this->sudokuScan(this->sample);
-    for (int i = 0; i < 50; i++)
+    for (int i = 0; i < 10; i++)
     {
         sudokuShuffle();
         sudokuSwap ();
     }
     int count = 0;
-    while (count < *level) //нужна переменная "уровень сложности" от 5 до 20 с увеличивающимися шагами
+    while (count < *level)
     {
         sudokuShuffle ();
         sudokuSwap ();
@@ -567,13 +558,13 @@ int sixteenTable::sudokuGen (int* level)   //генерация поля суд�
             j_arr[i] =  rand();
             j_arr[i] %= this->bodySize;
         }
-        bool iszero = false;
+        bool iszero[5];
         for (int i = 0; i < 5; i++)
         {
             if (this->body[i_arr[i]][j_arr[i]][0] == 0)
             {
                 count++;
-                iszero = true;
+                iszero[i] = true;
                 i = 5;
             }
         }
@@ -581,31 +572,34 @@ int sixteenTable::sudokuGen (int* level)   //генерация поля суд�
         {
             count++;
         }*/
-        if (!iszero)
+        bool addcount = false;
+        for (int i = 0; i < 5; i++)
         {
-            sixteenTable copyThis = *this;
-            for (int i = 0; i < 5; i++)
+            if (!iszero[i])
             {
+                sixteenTable copyThis = *this;
+
                 copyThis.body[i_arr[i]][j_arr[i]][0] = 0;
-            }
-            sixbase.fastRenderingSolutions(&copyThis);
-            int res = sixbase.getSDbSize();
-            sixbase.SDbClear();
-            if (res != 1)
-            {
-                count += 5;
-            }
-            else
-            {
-                count = 0;
-                for (int i = 0; i < 5; i++)
+                sixbase.fastRenderingSolutions(&copyThis);
+                int res = sixbase.getSDbSize();
+                sixbase.SDbClear();
+                if (res != 1)
                 {
-                    this->body[i_arr[i]][j_arr[i]][0] = 0;
+                    addcount = true;
+                }
+                else
+                {
+                    count = 0;
+                    for (int i = 0; i < 5; i++)
+                    {
+                        this->body[i_arr[i]][j_arr[i]][0] = 0;
+                    }
                 }
             }
         }
+        if (addcount) count++;
     }
-    sudokuShuffle ();
+    //sudokuShuffle ();
     return 0;
 }
 

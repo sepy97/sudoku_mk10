@@ -102,7 +102,8 @@ void MainWindow::on_newButton_clicked()
                 ui->sudokuWidget_16->setItem (i, j, item);
             }
         }
-        newtbl_16->sudokuGen (&hardlevel);
+        int tmplevel = hardlevel*2;
+        newtbl_16->sudokuGen (&tmplevel);
         restbl_16->sudokuCopy(newtbl_16, restbl_16);
 
         for (int i = 0; i < newtbl_16->bodySize; i++)
@@ -739,11 +740,12 @@ void MainWindow::on_sudokuWidget_doubleClicked(const QModelIndex &index)
 void MainWindow::on_hardLevelSlider_valueChanged(int value)
 {
    hardlevel = value;
-   if (hardlevel <= 15)
+   int totalrange = ui->hardLevelSlider->maximum()-ui->hardLevelSlider->minimum();
+   if (hardlevel <= totalrange/3)
    {
        ui->hardLevelLabel->setText("Easy");
    }
-   else if (hardlevel <= 25)
+   else if (hardlevel <= 2*totalrange/3)
    {
        ui->hardLevelLabel->setText("Medium");
    }

@@ -111,6 +111,7 @@ private slots:
 
     void on_newButton_released();
 
+
 private:
     Ui::MainWindow *ui;
 };
