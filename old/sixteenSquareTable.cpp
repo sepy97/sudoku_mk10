@@ -495,26 +495,9 @@ int sixteenDatabase::renderingSolutions (sixteenTable* This)  //генераци
     return 0;
 }
 
-int sixteenTable::findmin ()
-{
-    int min = 10;
-    for (int i = 0; i < this->bodySize; i++)
-    {
-        for (int j = 0; j < this->bodySize; j++)
-        {
-            if (this->body[i][j].size() != 1 && this->body[i][j].size() < min)
-            {
-                min = (int)this->body[i][j].size();
-            }
-        }
-    }
-    return min;
-}
-
 int sixteenDatabase::fastRenderingSolutions (sixteenTable* This)  //генерация решений - сначала простым методом, затем перебор. все решения записываются в database
 {
     This->sudokuSolve();
-    int val = This->findmin();
     for (int i = 0; i < This->bodySize; i++)
     {
         for (int j = 0; j < This->bodySize; j++)
@@ -525,9 +508,9 @@ int sixteenDatabase::fastRenderingSolutions (sixteenTable* This)  //генера
             }
             else
             {
-                if (This->body[i][j].size() == val)
+                if (This->body[i][j].size() > 2)
                 {
-                    for (int k = 1; k < val; k++)
+                    for (int k = 1; k <(int)This->body[i][j].size(); k++)
                     {
                         sixteenTable copyThis = *This;
                         copyThis.body[i][j][0] = This->body[i][j][k];
@@ -552,10 +535,6 @@ int sixteenDatabase::fastRenderingSolutions (sixteenTable* This)  //генера
     return 0;
 }
 
-struct point
-{
-    int x, y;
-};
 int sixteenTable::sudokuGen (int* level)   //генерация поля судоку в зависимости от сложности (level)
 {
     srand(time(0));
@@ -565,48 +544,62 @@ int sixteenTable::sudokuGen (int* level)   //генерация поля суд�
         sudokuShuffle();
         sudokuSwap ();
     }
-    
-    vector<point> itemstoelem;
-    for (int i = 0; i < this->bodySize; i++)
+    int count = 0;
+    while (count < *level)
     {
-        for (int j = 0; j < this->bodySize; j++)
+        sudokuShuffle ();
+        sudokuSwap ();
+        int i_arr[5];
+        int j_arr[5];
+        for (int i = 0; i < 5; i++)
         {
-            point tmp;
-            tmp.x = i;
-            tmp.y = j;
-            itemstoelem.push_back(tmp);
+            i_arr[i] =  rand();
+            i_arr[i] %= this->bodySize;
+            j_arr[i] =  rand();
+            j_arr[i] %= this->bodySize;
         }
+        bool iszero[5];
+        for (int i = 0; i < 5; i++)
+        {
+            if (this->body[i_arr[i]][j_arr[i]][0] == 0)
+            {
+                count++;
+                iszero[i] = true;
+                i = 5;
+            }
+        }
+        /*if (this->body[i1][j1][0] == 0 || this->body[i2][j2][0] == 0 || this->body[i3][j3][0] == 0 )//|| this->body[i5][j5][0] == 0)
+        {
+            count++;
+        }*/
+        bool addcount = false;
+        for (int i = 0; i < 5; i++)
+        {
+            if (!iszero[i])
+            {
+                sixteenTable copyThis = *this;
+
+                copyThis.body[i_arr[i]][j_arr[i]][0] = 0;
+                sixbase.fastRenderingSolutions(&copyThis);
+                int res = sixbase.getSDbSize();
+                sixbase.SDbClear();
+                if (res != 1)
+                {
+                    addcount = true;
+                }
+                else
+                {
+                    count = 0;
+                    for (int i = 0; i < 5; i++)
+                    {
+                        this->body[i_arr[i]][j_arr[i]][0] = 0;
+                    }
+                }
+            }
+        }
+        if (addcount) count++;
     }
-    
-    int collisions = 0, erasednumber = 0;
-    
-    while (erasednumber < *level)
-    {
-        int i = rand();
-        i %= itemstoelem.size();
-        
-        int i1 = itemstoelem[i].x;
-        int j1 = itemstoelem[i].y;
-        sixteenTable copyThis = *this;
-        copyThis.body[i1][j1][0] = 0;
-        sixbase.fastRenderingSolutions(&copyThis);
-        int res = sixbase.getSDbSize();
-        sixbase.SDbClear();
-        if (res != 1)
-        {
-            collisions++;
-            
-        }
-        else
-        {
-            erasednumber++;
-            this->body[i1][j1][0] = 0;
-        }
-        itemstoelem.erase(itemstoelem.begin()+i);
-        if (itemstoelem.size() <= 5 || collisions >= *level) break;
-    }
-    sudokuShuffle ();
-    sudokuSwap();
+    //sudokuShuffle ();
     return 0;
 }
 

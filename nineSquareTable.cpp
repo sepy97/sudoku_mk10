@@ -164,22 +164,11 @@ int nineTable::sudokuShuffle () //используются перемешива�
 nineTable* nineTable::sudokuCtor ()
 {
     nineTable* This = new nineTable;
-    /*for (int i = 0; i < This->bodySize; i++)
-    {
-        
-    }*/
     return This;
 }
 
 int nineTable::sudokuScan (string input)     //создание таблицы судоку из строки чисел, роль пустых клеток играет '0'
 {
-    /*for (int i = 0; i < this->bodySize; i++)
-    {
-        for (int j = 0; j < this->bodySize; j++)
-        {
-            this->body[i][j].push_back( input[i*this->bodySize+j]-'0');
-        }
-    }*/
     stringstream ss(input);
     string item;
     for (int i = 0; i < this->bodySize; i++)
@@ -547,6 +536,10 @@ int nineDatabase::fastRenderingSolutions (nineTable* This)  //генерация
     return 0;
 }
 
+struct point
+{
+    int x, y;
+};
 int nineTable::sudokuGen (int* level)   //генерация поля судоку в зависимости от сложности (level)
 {
     this->sudokuScan(this->sample);
@@ -555,73 +548,45 @@ int nineTable::sudokuGen (int* level)   //генерация поля судок
         sudokuShuffle();
         sudokuSwap ();
     }
-    int count = 0;
-    while (count < *level)  //нужна переменная "уровень сложности" от 5 до 20 с увеличивающимися шагами
+    
+    vector<point> itemstoelem;
+    for (int i = 0; i < this->bodySize; i++)
     {
-        sudokuShuffle ();
-        sudokuSwap ();
-        
-        /*int i = rand();
-        i %= this->bodySize;
-        int j = rand();
-        j %= this->bodySize;*/
-        int i1 = rand();
-        int i2 = rand();
-        int i3 = rand();
-        int i_1 = rand();
-        int i_2 = rand();
-        int i_3 = rand();
-        i1 %= this->squareSize;
-        i2 %= this->squareSize;
-        i3 %= this->squareSize;
-        i_1 %= this->squareSize;
-        i_2 %= this->squareSize;
-        i_3 %= this->squareSize;
-        i1 = (i1+1)*(i_1+1)-1;
-        i2 = (i2+1)*(i_2+1)-1;
-        i3 = (i3+1)*(i_3+1)-1;
-        
-        int j1 = rand();
-        int j2 = rand();
-        int j3 = rand();
-        int j_1 = rand();
-        int j_2 = rand();
-        int j_3 = rand();
-        j1 %= this->squareSize;
-        j2 %= this->squareSize;
-        j3 %= this->squareSize;
-        j_1 %= this->squareSize;
-        j_2 %= this->squareSize;
-        j_3 %= this->squareSize;
-        j1 = (j1+1)*(j_1+1)-1;
-        j2 = (j2+1)*(j_2+1)-1;
-        j3 = (j3+1)*(j_3+1)-1;
-        
-        if (this->body[i1][j1][0] == 0 || this->body[i2][j2][0] == 0 || this->body[i3][j3][0] == 0)
+        for (int j = 0; j < this->bodySize; j++)
         {
-            count++;
+            point tmp;
+            tmp.x = i;
+            tmp.y = j;
+            itemstoelem.push_back(tmp);
+        }
+    }
+    
+    int collisions = 0, erasednumber = 0;
+    
+    while (erasednumber < *level)
+    {
+        int i = rand();
+        i %= itemstoelem.size();
+        
+        int i1 = itemstoelem[i].x;
+        int j1 = itemstoelem[i].y;
+        nineTable copyThis = *this;
+        copyThis.body[i1][j1][0] = 0;
+        base.fastRenderingSolutions(&copyThis);
+        int res = base.getSDbSize();
+        base.SDbClear();
+        if (res != 1)
+        {
+            collisions++;
+            
         }
         else
         {
-            nineTable copyThis = *this;
-            copyThis.body[i1][j1][0] = 0;
-            copyThis.body[i2][j2][0] = 0;
-            copyThis.body[i3][j3][0] = 0;
-            base.fastRenderingSolutions(&copyThis);
-            int res = base.getSDbSize();
-            base.SDbClear();
-            if (res != 1)
-            {
-                count++;
-            }
-            else
-            {
-                count = 0;
-                this->body[i1][j1][0] = 0;
-                this->body[i2][j2][0] = 0;
-                this->body[i3][j3][0] = 0;
-            }
+            erasednumber++;
+            this->body[i1][j1][0] = 0;
         }
+        itemstoelem.erase(itemstoelem.begin()+i);
+        if (itemstoelem.size()==0) break;
     }
     sudokuShuffle ();
     return 0;

@@ -1,16 +1,16 @@
 //
-//  sixteenSquareTable.cpp
+//  nineSquareTable.cpp
 //  sudokuCommon_mk1
 //
-//  Created by Administrator on 23/01/2017.
+//  Created by Administrator on 22/01/2017.
 //  Copyright © 2017 Administrator. All rights reserved.
 //
 
-#include "sixteenSquareTable.h"
+#include "nineSquareTable.h"
 
-sixteenDatabase sixbase;
+nineDatabase base;
 
-int sixteenTable::sudokuRaw () //меняем местами две строки/столбца в одной зоне (первой/второй/третьей тройке)
+int nineTable::sudokuRaw () //меняем местами две строки/столбца в одной зоне (первой/второй/третьей тройке)
 {
     int area = rand();
     area %= this->squareSize;
@@ -35,7 +35,7 @@ int sixteenTable::sudokuRaw () //меняем местами две строки
     return 0;
 }
 
-int sixteenTable::sudokuArea ()    //меняем местами две зоны (две тройки)
+int nineTable::sudokuArea ()    //меняем местами две зоны (две тройки)
 {
     int firstarea  =  rand();
     firstarea      %= this->squareSize;
@@ -62,7 +62,7 @@ int sixteenTable::sudokuArea ()    //меняем местами две зоны
     return 0;
 }
 
-int sixteenTable::sudokuTrans ()   //транспонирование
+int nineTable::sudokuTrans ()   //транспонирование
 {
     for (int i = 0; i < this->bodySize; i++)
     {
@@ -76,7 +76,7 @@ int sixteenTable::sudokuTrans ()   //транспонирование
     return 0;
 }
 
-int sixteenTable::sudokuSwap ()    //особый путь перемешивания - берутся два случайных числа от 1 до 9 и меняются местами - те клетки, в которых стоит первое число меняются на те клетки, в которых стоит второе число. При такой замене правила не нарушаются
+int nineTable::sudokuSwap ()    //особый путь перемешивания - берутся два случайных числа от 1 до 9 и меняются местами - те клетки, в которых стоит первое число меняются на те клетки, в которых стоит второе число. При такой замене правила не нарушаются
 {
     int first = 0, second = 0;
     for (int k = 0; k < 50; k++)
@@ -127,9 +127,9 @@ int sixteenTable::sudokuSwap ()    //особый путь перемешива�
     return 0;
 }
 
-int sixteenTable::sudokuShuffle () //используются перемешивания столбцов и зон в случайном порядке
+int nineTable::sudokuShuffle () //используются перемешивания столбцов и зон в случайном порядке
 {
-    for (int i = 0; i < 30; i++)
+    for (int i = 0; i < 100; i++)
     {
         int funcnum = rand();
         funcnum %= 2;
@@ -161,14 +161,25 @@ int sixteenTable::sudokuShuffle () //используются перемешив
     return 0;
 }
 
-sixteenTable* sixteenTable::sudokuCtor ()
+nineTable* nineTable::sudokuCtor ()
 {
-    sixteenTable* This = (sixteenTable*) malloc (300);
+    nineTable* This = new nineTable;
+    /*for (int i = 0; i < This->bodySize; i++)
+    {
+        
+    }*/
     return This;
 }
 
-int sixteenTable::sudokuScan (string input)     //создание таблицы судоку из строки чисел, роль пустых клеток играет '0'
+int nineTable::sudokuScan (string input)     //создание таблицы судоку из строки чисел, роль пустых клеток играет '0'
 {
+    /*for (int i = 0; i < this->bodySize; i++)
+    {
+        for (int j = 0; j < this->bodySize; j++)
+        {
+            this->body[i][j].push_back( input[i*this->bodySize+j]-'0');
+        }
+    }*/
     stringstream ss(input);
     string item;
     for (int i = 0; i < this->bodySize; i++)
@@ -183,10 +194,11 @@ int sixteenTable::sudokuScan (string input)     //создание таблиц�
             }
         }
     }
+
     return 0;
 }
 
-int sixteenTable::sudokuCheck ()   //проверка, есть ли элемент в строке/столбце/квадрате
+int nineTable::sudokuCheck ()   //проверка, есть ли элемент в строке/столбце/квадрате
 {
     for (int i = 0; i < this->bodySize; i++)
     {
@@ -255,7 +267,7 @@ int sixteenTable::sudokuCheck ()   //проверка, есть ли элеме�
     return 0;
 }
 
-int sixteenTable::sudokuNums ()    //проверка каждого варианта в клетке на корректность в новых условиях
+int nineTable::sudokuNums ()    //проверка каждого варианта в клетке на корректность в новых условиях
 {
     for (int i = 0; i < this->bodySize; i++)
     {
@@ -323,7 +335,7 @@ int sixteenTable::sudokuNums ()    //проверка каждого вариа�
     return 0;
 }
 
-int sixteenTable::sudokuSolve ()   //попытка решения с помощью банальных проверок
+int nineTable::sudokuSolve ()   //попытка решения с помощью банальных проверок
 {
     this->bodyChanged = true;
     while (this->bodyChanged)
@@ -348,7 +360,7 @@ int sixteenTable::sudokuSolve ()   //попытка решения с помощ
     return 0;
 }
 
-int sixteenTable::sudokuPrint ()   //распечатка на stdio
+int nineTable::sudokuPrint ()   //распечатка на stdio
 {
     for (int i = 0; i < this->bodySize; i++)
     {
@@ -363,7 +375,7 @@ int sixteenTable::sudokuPrint ()   //распечатка на stdio
     return 0;
 }
 
-int sixteenTable::sudokuCopy (sixteenTable* from, sixteenTable* to)
+int nineTable::sudokuCopy (nineTable* from, nineTable* to)
 {
     to->bodyChanged = from->bodyChanged;
     for (int i = 0; i < from->bodySize; i++)
@@ -376,7 +388,7 @@ int sixteenTable::sudokuCopy (sixteenTable* from, sixteenTable* to)
     return 0;
 }
 
-int sixteenTable::sudokuCompare (sixteenTable* first, sixteenTable* second)  //сравнение двух судоку для database
+int nineTable::sudokuCompare (nineTable* first, nineTable* second)  //сравнение двух судоку для database
 {
     if (first->bodySize != second->bodySize) return -1;
     int res = 0;
@@ -390,20 +402,20 @@ int sixteenTable::sudokuCompare (sixteenTable* first, sixteenTable* second)  //�
     return res;
 }
 
-int sixteenTable::sudokuDtor ()
+int nineTable::sudokuDtor ()
 {
     free (this);
     return 0;
 }
 
-sixteenDatabase* sixteenDatabase::SDbCtor ()
+nineDatabase* nineDatabase::SDbCtor ()
 {
-    sixteenDatabase* This = (sixteenDatabase*) malloc (256);
+    nineDatabase* This = (nineDatabase*) malloc (100);
     This->SDbSize = 0;
     return This;
 }
 
-int sixteenDatabase::SDbInsert (sixteenTable* toInsert) //вставка решения в database
+int nineDatabase::SDbInsert (nineTable* toInsert) //вставка решения в database
 {
     if (this->SDbSize == 0)
     {
@@ -430,7 +442,7 @@ int sixteenDatabase::SDbInsert (sixteenTable* toInsert) //вставка реш�
     return this->SDbSize;
 }
 
-int sixteenDatabase::SDbPop ()     //удаление решения из database
+int nineDatabase::SDbPop ()     //удаление решения из database
 {
     if (this->SDbSize <= 0) return -1;
     this->database.pop_back();
@@ -438,7 +450,7 @@ int sixteenDatabase::SDbPop ()     //удаление решения из databa
     return this->SDbSize;
 }
 
-int sixteenDatabase::SDbClear ()
+int nineDatabase::SDbClear ()
 {
     while (this->SDbSize > 0)
     {
@@ -447,7 +459,7 @@ int sixteenDatabase::SDbClear ()
     return 0;
 }
 
-int sixteenDatabase::SDbPrint ()   //распечатка всех решений, внесенных в database
+int nineDatabase::SDbPrint ()   //распечатка всех решений, внесенных в database
 {
     for (int i = 0; i < this->SDbSize; i++)
     {
@@ -457,7 +469,7 @@ int sixteenDatabase::SDbPrint ()   //распечатка всех решени�
     return 0;
 }
 
-int sixteenDatabase::renderingSolutions (sixteenTable* This)  //генерация решений - сначала простым методом, затем перебор. все решения записываются в database
+int nineDatabase::renderingSolutions (nineTable* This)  //генерация решений - сначала простым методом, затем перебор. все решения записываются в database
 {
     This->sudokuSolve();
     for (int i = 0; i < This->bodySize; i++)
@@ -474,7 +486,7 @@ int sixteenDatabase::renderingSolutions (sixteenTable* This)  //генераци
                 {
                     for (int k = 1; k < (int)This->body[i][j].size(); k++)
                     {
-                        sixteenTable copyThis = *This;
+                        nineTable copyThis = *This;
                         copyThis.body[i][j][0] = This->body[i][j][k];
                         renderingSolutions(&copyThis);
                         if (!This->solved) continue;
@@ -495,26 +507,9 @@ int sixteenDatabase::renderingSolutions (sixteenTable* This)  //генераци
     return 0;
 }
 
-int sixteenTable::findmin ()
-{
-    int min = 10;
-    for (int i = 0; i < this->bodySize; i++)
-    {
-        for (int j = 0; j < this->bodySize; j++)
-        {
-            if (this->body[i][j].size() != 1 && this->body[i][j].size() < min)
-            {
-                min = (int)this->body[i][j].size();
-            }
-        }
-    }
-    return min;
-}
-
-int sixteenDatabase::fastRenderingSolutions (sixteenTable* This)  //генерация решений - сначала простым методом, затем перебор. все решения записываются в database
+int nineDatabase::fastRenderingSolutions (nineTable* This)  //генерация решений - сначала простым методом, затем перебор. все решения записываются в database
 {
     This->sudokuSolve();
-    int val = This->findmin();
     for (int i = 0; i < This->bodySize; i++)
     {
         for (int j = 0; j < This->bodySize; j++)
@@ -525,11 +520,11 @@ int sixteenDatabase::fastRenderingSolutions (sixteenTable* This)  //генера
             }
             else
             {
-                if (This->body[i][j].size() == val)
+                if (This->body[i][j].size() > 2)
                 {
-                    for (int k = 1; k < val; k++)
+                    for (int k = 1; k < (int)This->body[i][j].size(); k++)
                     {
-                        sixteenTable copyThis = *This;
+                        nineTable copyThis = *This;
                         copyThis.body[i][j][0] = This->body[i][j][k];
                         fastRenderingSolutions(&copyThis);
                         if (this->SDbSize > 1) return -2;
@@ -552,65 +547,104 @@ int sixteenDatabase::fastRenderingSolutions (sixteenTable* This)  //генера
     return 0;
 }
 
-struct point
+int nineTable::sudokuGen (int* level)   //генерация поля судоку в зависимости от сложности (level)
 {
-    int x, y;
-};
-int sixteenTable::sudokuGen (int* level)   //генерация поля судоку в зависимости от сложности (level)
-{
-    srand(time(0));
     this->sudokuScan(this->sample);
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 50; i++)
     {
         sudokuShuffle();
         sudokuSwap ();
     }
-    
-    vector<point> itemstoelem;
-    for (int i = 0; i < this->bodySize; i++)
+    int count = 0;
+    while (count < *level)  //нужна переменная "уровень сложности" от 5 до 20 с увеличивающимися шагами
     {
-        for (int j = 0; j < this->bodySize; j++)
-        {
-            point tmp;
-            tmp.x = i;
-            tmp.y = j;
-            itemstoelem.push_back(tmp);
-        }
-    }
-    
-    int collisions = 0, erasednumber = 0;
-    
-    while (erasednumber < *level)
-    {
-        int i = rand();
-        i %= itemstoelem.size();
+        sudokuShuffle ();
+        sudokuSwap ();
         
-        int i1 = itemstoelem[i].x;
-        int j1 = itemstoelem[i].y;
-        sixteenTable copyThis = *this;
-        copyThis.body[i1][j1][0] = 0;
-        sixbase.fastRenderingSolutions(&copyThis);
-        int res = sixbase.getSDbSize();
-        sixbase.SDbClear();
-        if (res != 1)
+        /*int i = rand();
+        i %= this->bodySize;
+        int j = rand();
+        j %= this->bodySize;*/
+        int i1 = rand();
+        int i2 = rand();
+        int i3 = rand();
+        int i_1 = rand();
+        int i_2 = rand();
+        int i_3 = rand();
+        i1 %= this->squareSize;
+        i2 %= this->squareSize;
+        i3 %= this->squareSize;
+        i_1 %= this->squareSize;
+        i_2 %= this->squareSize;
+        i_3 %= this->squareSize;
+        i1 = (i1+1)*(i_1+1)-1;
+        i2 = (i2+1)*(i_2+1)-1;
+        i3 = (i3+1)*(i_3+1)-1;
+        
+        int j1 = rand();
+        int j2 = rand();
+        int j3 = rand();
+        int j_1 = rand();
+        int j_2 = rand();
+        int j_3 = rand();
+        j1 %= this->squareSize;
+        j2 %= this->squareSize;
+        j3 %= this->squareSize;
+        j_1 %= this->squareSize;
+        j_2 %= this->squareSize;
+        j_3 %= this->squareSize;
+        j1 = (j1+1)*(j_1+1)-1;
+        j2 = (j2+1)*(j_2+1)-1;
+        j3 = (j3+1)*(j_3+1)-1;
+        
+        if (this->body[i1][j1][0] == 0 || this->body[i2][j2][0] == 0 || this->body[i3][j3][0] == 0)
         {
-            collisions++;
-            
+            count++;
         }
         else
         {
-            erasednumber++;
-            this->body[i1][j1][0] = 0;
+            nineTable copyThis = *this;
+            copyThis.body[i1][j1][0] = 0;
+            copyThis.body[i2][j2][0] = 0;
+            copyThis.body[i3][j3][0] = 0;
+            base.fastRenderingSolutions(&copyThis);
+            int res = base.getSDbSize();
+            base.SDbClear();
+            if (res != 1)
+            {
+                count++;
+            }
+            else
+            {
+                count = 0;
+                this->body[i1][j1][0] = 0;
+                this->body[i2][j2][0] = 0;
+                this->body[i3][j3][0] = 0;
+            }
         }
-        itemstoelem.erase(itemstoelem.begin()+i);
-        if (itemstoelem.size() <= 5 || collisions >= *level) break;
     }
     sudokuShuffle ();
-    sudokuSwap();
     return 0;
 }
 
-int sixteenDatabase::getSDbSize ()
+int nineTable::sudokuClear ()
+{
+    for (int i = 0; i < this->bodySize; i++)
+    {
+        
+        for (int j = 0; j < this->bodySize; j++)
+        {
+            while (this->body[i][j].size() > 0)
+            {
+                this->body[i][j].pop_back();
+            }
+
+        }
+    }
+        return 0;
+}
+
+int nineDatabase::getSDbSize ()
 {
     return this->SDbSize;
 }

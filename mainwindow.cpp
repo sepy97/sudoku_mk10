@@ -102,7 +102,7 @@ void MainWindow::on_newButton_clicked()
                 ui->sudokuWidget_16->setItem (i, j, item);
             }
         }
-        int tmplevel = hardlevel*2;
+        int tmplevel = (int)(hardlevel*100/ui->hardLevelSlider->maximum());
         newtbl_16->sudokuGen (&tmplevel);
         restbl_16->sudokuCopy(newtbl_16, restbl_16);
 

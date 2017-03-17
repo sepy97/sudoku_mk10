@@ -37,7 +37,6 @@ public:
     int              sudokuArea    ();
     int              sudokuSwap    ();
     int              sudokuShuffle ();
-    int              findmin       ();
     int              sudokuGen     (int* level);
     const static int bodySize                 = 16;
     const static int squareSize               = 4;
