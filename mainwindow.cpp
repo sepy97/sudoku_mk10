@@ -911,132 +911,138 @@ void MainWindow::on_sixteenButton_16_clicked()
 int MainWindow::nineSudokuSave()
 {
     int s = 0;
-    ofstream fout;
-    QString saveFile = QFileDialog::getSaveFileName(this, "Select a file to save...", QDir::currentPath(), tr("Documents (*.txt)"));
-    if (!saveFile.isEmpty() && !saveFile.isNull())
-    {
-        fout.open(saveFile.toStdString().c_str());
-        assert (!fout.fail());
-
-        for (int i = 0; i < newtbl->bodySize; i++)
+    const int n1 = 2; // добавление к счетчику после заполнения типа таблицы
+        const int n2 = 83; // добавление к счетчику после заполнения чисел исходного кроссворда
+        const int n3 = 165; // общее число сохраняемых элементов = 81*2+2
+        int a[n3];
+        ofstream fout;
+        QString saveFile = QFileDialog::getSaveFileName(this, "Select a file to save...", QDir::currentPath(), tr("Documents (*.txt)"));
+        if (!saveFile.isEmpty() && !saveFile.isNull())
         {
-            for(int j = 0; j < newtbl->bodySize; j++)
+            fout.open(saveFile.toStdString().c_str(),ios::binary);
+            assert (!fout.fail());
+
+            for (int i = 0; i < newtbl->bodySize; i++)
             {
-                bool ok = true;
-                s += ui->sudokuWidget->item(i,j)->text().toInt(&ok, 10);//
+                for(int j = 0; j < newtbl->bodySize; j++)
+                {
+                    bool ok = true;
+                    s += ui->sudokuWidget->item(i,j)->text().toInt(&ok, 10);//
+                }
             }
-        }
+            a[0] = s*newtbl->bodySize;
+            a[1] = 99;
 
-        fout << s*newtbl->bodySize << "\n" << newtbl->bodySize << newtbl->bodySize << "\n" ;//<< newtbl-> << "\n";
-
-        for (int i = 0; i < newtbl->bodySize; i++)
-        {
-            for (int j = 0; j < newtbl->bodySize; j++)
+            for (int i = 0; i < newtbl->bodySize; i++)
             {
-                fout << newtbl->body[i][j][0] << " ";
+                for (int j = 0; j < newtbl->bodySize; j++)
+                {
+                    a[i*newtbl->bodySize+j+n1] = newtbl->body[i][j][0];
+                }
             }
-            fout <<"\n";
-        }
 
-        for (int i = 0; i < newtbl->bodySize; i++)
-        {
-            for (int j = 0; j < newtbl->bodySize; j++)
+            for (int i = 0; i < newtbl->bodySize; i++)
             {
-                bool ok = true;
-                fout << ui->sudokuWidget->item(i,j)->text().toInt(&ok, 10) << " ";
+                for (int j = 0; j < newtbl->bodySize; j++)
+                {
+                    bool ok = true;
+                    a[i*newtbl->bodySize+j+n2] = ui->sudokuWidget->item(i,j)->text().toInt(&ok, 10);
+                }
             }
-            fout <<"\n";
+            a[n3-1] = hardlevel;
+            fout.write ((char*)a,4*n3);
+            fout.close();
         }
-        fout << hardlevel << "\n";
-
-        fout.close();
-    }
-    return s;
+        return s;
 }
 
 int MainWindow::nineSudokuLoad()
 {
     int sum = 0, checksum = 0, type, k;
-    ifstream fin;
-    QString saveFile = QFileDialog::getOpenFileName(this, "Select a file to load...", QDir::currentPath(), tr("Documents (*.txt)"));
-    if (!saveFile.isEmpty() && !saveFile.isNull())
-    {
-        fin.open(saveFile.toStdString().c_str());
-        assert (!fin.fail());
-
-        fin >> checksum >> type;
-        if (type != 99)
+        ifstream fin;
+        QString saveFile = QFileDialog::getOpenFileName(this, "Select a file to load...", QDir::currentPath(), tr("Documents (*.txt)"));
+        if (!saveFile.isEmpty() && !saveFile.isNull())
         {
-            //здесь должно быть сообщение об ошибке
-            return 0;
-        }
-        ui->sudokuWidget->clear();
-        newtbl = new nineTable;
-        restbl = new nineTable;
-        newbase = new nineDatabase;
-
-        for (int i = 0; i < newtbl->bodySize; i++)
-        {
-            for (int j = 0; j < newtbl->bodySize; j++)
+            fin.open(saveFile.toStdString().c_str(), ios::binary);
+            assert (!fin.fail());
+            fin.read((char*)&checksum,4);
+            fin.read((char*)&type,4);
+            if (type != 99)
             {
-                fin >> k;
-                newtbl->body[i][j].push_back(k);
+                //сообщение об ошибке
+                return 0;
             }
-        }
+            ui->sudokuWidget->clear();
+            newtbl = new nineTable;
+            restbl = new nineTable;
+            newbase = new nineDatabase;
 
-        for (int i = 0; i < newtbl->bodySize; i++)
-        {
-            for (int j = 0; j < newtbl->bodySize; j++)
+            for (int i = 0; i < newtbl->bodySize; i++)
             {
-                fin >> k;
-                sum += k;
-                QTableWidgetItem *item = new QTableWidgetItem();
-
-                if (k != 0)
+                for (int j = 0; j < newtbl->bodySize; j++)
                 {
-                    numbers++;
-                    QString tmp2 = QString::number (k);
-                    QString nothingstr = "0";
-                    insertNumber (nothingstr, tmp2);
-                    item->setText (tmp2);
-                    ui->sudokuWidget->setItem (i, j, item);
-                    if (newtbl->body[i][j][0] != 0)
+                    fin.read((char*)&k,4);
+                    newtbl->body[i][j].push_back(k);
+                }
+            }
+
+            for (int i = 0; i < newtbl->bodySize; i++)
+            {
+                for (int j = 0; j < newtbl->bodySize; j++)
+                {
+                    fin.read((char*)&k,4);
+                    sum += k;
+                    QTableWidgetItem *item = new QTableWidgetItem();
+
+                    if (k != 0)
                     {
-                        ui->sudokuWidget->item (i, j)->setFlags (Qt::NoItemFlags);
+                        numbers++;
+                        QString tmp2 = QString::number (k);
+                        QString nothingstr = "0";
+                        insertNumber (nothingstr, tmp2);
+                        item->setText (tmp2);
+                        ui->sudokuWidget->setItem (i, j, item);
+                        if (newtbl->body[i][j][0] != 0)
+                        {
+                            ui->sudokuWidget->item (i, j)->setFlags (Qt::NoItemFlags);
+                        }
+                    }
+                    else
+                    {
+                        ui->sudokuWidget->setItem (i, j, item);
                     }
                 }
-                else
-                {
-                    ui->sudokuWidget->setItem (i, j, item);
-                }
             }
+
+            sum *= newtbl->bodySize;
+            if (checksum != sum)
+            {
+                return -1;
+            }
+
+            fin.read((char*)&hardlevel,4);
+            ui->hardLevelSlider->setSliderPosition (hardlevel);
+
+            restbl->sudokuCopy(newtbl, restbl);
+            newbase->renderingSolutions(restbl);
+
+            fin.close();
         }
-
-        sum *= newtbl->bodySize;
-        if (checksum != sum)
-        {
-            return -1;
-        }
-
-        fin >> hardlevel;
-        ui->hardLevelSlider->setSliderPosition (hardlevel);
-
-        restbl->sudokuCopy(newtbl, restbl);
-        newbase->renderingSolutions(restbl);
-
-        fin.close();
-    }
-    return 0;
+        return 0;
 }
 
 int MainWindow::sixteenSudokuSave()
 {
     int s = 0;
-    ofstream fout;
+    const int n1 = 2; // добавление к счетчику после заполнения типа таблицы
+    const int n2 = 258; // добавление к счетчику после заполнения чисел исходного кроссворда
+    const int n3 = 515; // общее число сохраняемых элементов = 256*2+2
+    int a[n3];
+
     QString saveFile = QFileDialog::getSaveFileName(this, "Select a file to save...", QDir::currentPath(), tr("Documents (*.txt)"));
     if (!saveFile.isEmpty() && !saveFile.isNull())
     {
-        fout.open(saveFile.toStdString().c_str());
+        ofstream fout(saveFile.toStdString().c_str(), ios::binary);
         assert (!fout.fail());
 
         for (int i = 0; i < newtbl_16->bodySize; i++)
@@ -1047,28 +1053,27 @@ int MainWindow::sixteenSudokuSave()
                 s += ui->sudokuWidget_16->item(i,j)->text().toInt(&ok, 10);
             }
         }
-
-        fout << s*newtbl_16->bodySize << "\n" << newtbl_16->bodySize << newtbl_16->bodySize << "\n" ;//<< newtbl-> << "\n";
+        a[0] = s*newtbl_16->bodySize;
+        a[1] = 1616;
 
         for (int i = 0; i < newtbl_16->bodySize; i++)
         {
             for (int j = 0; j < newtbl_16->bodySize; j++)
             {
-                fout << newtbl_16->body[i][j][0] << " ";
+                a[i*newtbl_16->bodySize+j+n1] = newtbl_16->body[i][j][0];
             }
-            fout <<"\n";
         }
+
         for (int i = 0; i < newtbl_16->bodySize; i++)
         {
             for (int j = 0; j < newtbl_16->bodySize; j++)
             {
                 bool ok = true;
-                fout << ui->sudokuWidget_16->item(i,j)->text().toInt(&ok, 10) << " ";
+                a[i*newtbl_16->bodySize+j+n2] = ui->sudokuWidget_16->item(i,j)->text().toInt(&ok, 10);
             }
-            fout <<"\n";
         }
-        fout << hardlevel << "\n";
-
+        a[n3-1] = hardlevel;
+        fout.write ((char*)a,4*n3);
         fout.close();
     }
     return s;
@@ -1077,75 +1082,74 @@ int MainWindow::sixteenSudokuSave()
 int MainWindow::sixteenSudokuLoad()
 {
     int sum = 0, checksum = 0, type, k;
-    ifstream fin;
-    QString saveFile = QFileDialog::getOpenFileName(this, "Select a file to load...", QDir::currentPath(), tr("Documents (*.txt)"));
-    if (!saveFile.isEmpty() && !saveFile.isNull())
-    {
-        fin.open(saveFile.toStdString().c_str());
-        assert (!fin.fail());
-
-        fin >> checksum >> type;
-        if (type != 1616)
+        QString saveFile = QFileDialog::getOpenFileName(this, "Select a file to load...", QDir::currentPath(), tr("Documents (*.txt)"));
+        if (!saveFile.isEmpty() && !saveFile.isNull())
         {
-            //сообщение об ошибке
-            return 0;
-        }
-        ui->sudokuWidget_16->clear();
-        newtbl_16 = new sixteenTable;
-        restbl_16 = new sixteenTable;
-        newbase_16 = new sixteenDatabase;
-
-        for (int i = 0; i < newtbl_16->bodySize; i++)
-        {
-            for (int j = 0; j < newtbl_16->bodySize; j++)
+            ifstream  fin(saveFile.toStdString().c_str(),ios::binary);
+            assert (!fin.fail());
+            fin.read((char*)&checksum,4);
+            fin.read((char*)&type,4);
+            if (type != 1616)
             {
-                fin >> k;
-                newtbl_16->body[i][j].push_back(k);
+                //сообщение об ошибке
+                return 0;
             }
-        }
+            ui->sudokuWidget_16->clear();
+            newtbl_16 = new sixteenTable;
+            restbl_16 = new sixteenTable;
+            newbase_16 = new sixteenDatabase;
 
-        for (int i = 0; i < newtbl_16->bodySize; i++)
-        {
-            for (int j = 0; j < newtbl_16->bodySize; j++)
+            for (int i = 0; i < newtbl_16->bodySize; i++)
             {
-                fin >> k;
-                sum += k;
-                QTableWidgetItem *item = new QTableWidgetItem();
-
-                if (k != 0)
+                for (int j = 0; j < newtbl_16->bodySize; j++)
                 {
-                    numbers_16++;
-                    QString tmp2 = QString::number (k);
-                    QString nothingstr = "0";
-                    insertNumber_16 (nothingstr, tmp2);
-                    item->setText (tmp2);
-                    ui->sudokuWidget_16->setItem (i, j, item);
-                    if (newtbl_16->body[i][j][0] != 0)
+                    fin.read((char*)&k,4);
+                    newtbl_16->body[i][j].push_back(k);
+                }
+            }
+
+            for (int i = 0; i < newtbl_16->bodySize; i++)
+            {
+                for (int j = 0; j < newtbl_16->bodySize; j++)
+                {
+                    fin.read((char*)&k,4);
+                    sum += k;
+                    QTableWidgetItem *item = new QTableWidgetItem();
+
+                    if (k != 0)
                     {
-                        ui->sudokuWidget_16->item (i, j)->setFlags (Qt::NoItemFlags);
+                        numbers_16++;
+                        QString tmp2 = QString::number (k);
+                        QString nothingstr = "0";
+                        insertNumber_16 (nothingstr, tmp2);
+                        item->setText (tmp2);
+                        ui->sudokuWidget_16->setItem (i, j, item);
+                        if (newtbl_16->body[i][j][0] != 0)
+                        {
+                            ui->sudokuWidget_16->item (i, j)->setFlags (Qt::NoItemFlags);
+                        }
+                    }
+                    else
+                    {
+                        ui->sudokuWidget_16->setItem (i, j, item);
                     }
                 }
-                else
-                {
-                    ui->sudokuWidget_16->setItem (i, j, item);
-                }
             }
+
+            sum *= newtbl_16->bodySize;
+            if (checksum != sum)
+            {
+                return -1;
+            }
+            fin.read((char*)&hardlevel,4);
+            ui->hardLevelSlider->setSliderPosition (hardlevel);
+
+            restbl_16->sudokuCopy(newtbl_16, restbl_16);
+            newbase_16->renderingSolutions(restbl_16);
+
+            fin.close();
         }
-
-        sum *= newtbl_16->bodySize;
-        if (checksum != sum)
-        {
-            return -1;
-        }
-        fin >> hardlevel;
-        ui->hardLevelSlider->setSliderPosition (hardlevel);
-
-        restbl_16->sudokuCopy(newtbl_16, restbl_16);
-        newbase_16->renderingSolutions(restbl_16);
-
-        fin.close();
-    }
-    return 0;
+        return 0;
 }
 
 void MainWindow::on_saveButton_clicked()
