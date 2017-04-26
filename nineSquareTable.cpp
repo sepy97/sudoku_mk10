@@ -364,7 +364,7 @@ int nineTable::sudokuPrint ()   //распечатка на stdio
     return 0;
 }
 
-int nineTable::sudokuCopy (nineTable* from, nineTable* to)
+int nineTable::sudokuCopy (nineTable* from, nineTable* to) //создание копии таблицы (нужно в рекурсивном вызове в генерации кроссворда)
 {
     to->bodyChanged = from->bodyChanged;
     for (int i = 0; i < from->bodySize; i++)
@@ -497,7 +497,7 @@ int nineDatabase::renderingSolutions (nineTable* This)  //генерация р�
 }
 
 int nineDatabase::fastRenderingSolutions (nineTable* This)  //генерация решений - сначала простым методом, затем перебор. все решения записываются в database
-{
+{                                                           //новизна функции в отсеивании уже на этапе, когда нашлось хотя бы два решения
     This->sudokuSolve();
     for (int i = 0; i < This->bodySize; i++)
     {
@@ -592,7 +592,7 @@ int nineTable::sudokuGen (int* level)   //генерация поля судок
     return 0;
 }
 
-int nineTable::sudokuClear ()
+int nineTable::sudokuClear() //очистка судоку
 {
     for (int i = 0; i < this->bodySize; i++)
     {

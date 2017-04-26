@@ -363,7 +363,7 @@ int sixteenTable::sudokuPrint ()   //распечатка на stdio
     return 0;
 }
 
-int sixteenTable::sudokuCopy (sixteenTable* from, sixteenTable* to)
+int sixteenTable::sudokuCopy (sixteenTable* from, sixteenTable* to) //создание копии судоку (нужно при рекурсивном вызове в генерации кроссворда)
 {
     to->bodyChanged = from->bodyChanged;
     for (int i = 0; i < from->bodySize; i++)

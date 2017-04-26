@@ -3,7 +3,7 @@
 #include "nineSquareTable.h"
 #include "sixteenSquareTable.h"
 
-int hardlevel = 2;
+int hardlevel = 5;
 nineDatabase* newbase;
 nineTable* newtbl;
 nineTable* restbl;
@@ -15,6 +15,7 @@ sixteenTable* newtbl_16;
 sixteenTable* restbl_16;
 int numbers_16 = 0;
 int num_16[16] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -75,6 +76,7 @@ void MainWindow::on_newButton_clicked()
                     insertNumber(nothingstr, tmp2);
                     item->setText (tmp2);
                     ui->sudokuWidget->setItem (i, j, item);
+                    item->setTextAlignment(Qt::AlignCenter);
                     ui->sudokuWidget->item (i, j)->setFlags (Qt::NoItemFlags);
                 }
             }
@@ -120,6 +122,7 @@ void MainWindow::on_newButton_clicked()
                     QString nothingstr = "0";
                     insertNumber_16(nothingstr, tmp2);
                     item->setText (tmp2);
+                    item->setTextAlignment(Qt::AlignCenter);
                     ui->sudokuWidget_16->setItem (i, j, item);
                     ui->sudokuWidget_16->item (i, j)->setFlags (Qt::NoItemFlags);
                 }
@@ -149,7 +152,8 @@ void MainWindow::pushButton (int num)
             {
                 insertNumber (ui->sudokuWidget->item(i,j)->text(), tmp);
             }
-            ui->sudokuWidget->item(i, j)->setText(tmp);
+            ui->sudokuWidget->item(i, j)->setText(tmp);      
+            ui->sudokuWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
             if (numbers == (newtbl->bodySize)*(newtbl->bodySize)) on_checkButton_clicked();
         }
         ui->sudokuWidget->selectedItems().first()->setSelected(false);
@@ -565,7 +569,7 @@ void MainWindow::on_checkButton_clicked()
        if (!wrong)
        {
            QMessageBox newmsgbox;
-           newmsgbox.setText("Everything is OK!");
+           newmsgbox.setText("Congratulations!\nSUDOKU is solved.\nPush 'NEW GAME' to make new SUDOKU.");
            newmsgbox.exec();
        }
    }
@@ -607,7 +611,7 @@ void MainWindow::on_checkButton_clicked()
        if (!wrong)
        {
            QMessageBox newmsgbox;
-           newmsgbox.setText("Everything is OK!");
+           newmsgbox.setText("Congratulations!\nSUDOKU is solved.\nPush 'NEW GAME' to make new SUDOKU.");
            newmsgbox.exec();
        }
    }
@@ -664,6 +668,7 @@ void MainWindow::on_hintButton_clicked()
            for (int q = 0; q < newtbl->bodySize; q++)
            {
                ui->sudokuWidget->item(p, q)->setBackground(Qt::white);
+               ui->sudokuWidget->item(p, q)->setTextAlignment(Qt::AlignCenter);
            }
        }
        if (numbers == (newtbl->bodySize)*(newtbl->bodySize)) on_checkButton_clicked();
@@ -719,6 +724,7 @@ void MainWindow::on_hintButton_clicked()
            for (int q = 0; q < newtbl_16->bodySize; q++)
            {
                ui->sudokuWidget_16->item(p, q)->setBackground(Qt::white);
+               ui->sudokuWidget_16->item(p, q)->setTextAlignment(Qt::AlignCenter);
            }
        }
        if (numbers_16 == (newtbl_16->bodySize)*(newtbl_16->bodySize)) on_checkButton_clicked();
@@ -815,6 +821,7 @@ void MainWindow::pushButton_16 (int num)
                insertNumber_16 (ui->sudokuWidget_16->item(i,j)->text(), tmp);
            }
            ui->sudokuWidget_16->item(i, j)->setText(tmp);
+           ui->sudokuWidget_16->item(i, j)->setTextAlignment(Qt::AlignCenter);
            if (numbers_16 == (newtbl_16->bodySize)*(newtbl_16->bodySize)) on_checkButton_clicked();
        }
        ui->sudokuWidget_16->selectedItems().first()->setSelected(false);
@@ -832,7 +839,6 @@ void MainWindow::on_oneButton_16_clicked()
 {
    pushButton_16 (1);
 }
-
 
 void MainWindow::on_twoButton_16_clicked()
 {
@@ -916,7 +922,7 @@ int MainWindow::nineSudokuSave()
         const int n3 = 165; // общее число сохраняемых элементов = 81*2+2
         int a[n3];
         ofstream fout;
-        QString saveFile = QFileDialog::getSaveFileName(this, "Select a file to save...", QDir::currentPath(), tr("Documents (*.txt)"));
+        QString saveFile = QFileDialog::getSaveFileName(this, "Select a file to save...", QDir::currentPath(), tr("Documents (*.sudoku)"));
         if (!saveFile.isEmpty() && !saveFile.isNull())
         {
             fout.open(saveFile.toStdString().c_str(),ios::binary);
@@ -960,7 +966,7 @@ int MainWindow::nineSudokuLoad()
 {
     int sum = 0, checksum = 0, type, k;
         ifstream fin;
-        QString saveFile = QFileDialog::getOpenFileName(this, "Select a file to load...", QDir::currentPath(), tr("Documents (*.txt)"));
+        QString saveFile = QFileDialog::getOpenFileName(this, "Select a file to load...", QDir::currentPath(), tr("Documents (*.sudoku)"));
         if (!saveFile.isEmpty() && !saveFile.isNull())
         {
             fin.open(saveFile.toStdString().c_str(), ios::binary);
@@ -993,6 +999,7 @@ int MainWindow::nineSudokuLoad()
                     fin.read((char*)&k,4);
                     sum += k;
                     QTableWidgetItem *item = new QTableWidgetItem();
+                    item->setTextAlignment(Qt::AlignCenter);
 
                     if (k != 0)
                     {
@@ -1039,7 +1046,7 @@ int MainWindow::sixteenSudokuSave()
     const int n3 = 515; // общее число сохраняемых элементов = 256*2+2
     int a[n3];
 
-    QString saveFile = QFileDialog::getSaveFileName(this, "Select a file to save...", QDir::currentPath(), tr("Documents (*.txt)"));
+    QString saveFile = QFileDialog::getSaveFileName(this, "Select a file to save...", QDir::currentPath(), tr("Documents (*.sudoku)"));
     if (!saveFile.isEmpty() && !saveFile.isNull())
     {
         ofstream fout(saveFile.toStdString().c_str(), ios::binary);
@@ -1082,7 +1089,7 @@ int MainWindow::sixteenSudokuSave()
 int MainWindow::sixteenSudokuLoad()
 {
     int sum = 0, checksum = 0, type, k;
-        QString saveFile = QFileDialog::getOpenFileName(this, "Select a file to load...", QDir::currentPath(), tr("Documents (*.txt)"));
+        QString saveFile = QFileDialog::getOpenFileName(this, "Select a file to load...", QDir::currentPath(), tr("Documents (*.sudoku)"));
         if (!saveFile.isEmpty() && !saveFile.isNull())
         {
             ifstream  fin(saveFile.toStdString().c_str(),ios::binary);
@@ -1115,6 +1122,7 @@ int MainWindow::sixteenSudokuLoad()
                     fin.read((char*)&k,4);
                     sum += k;
                     QTableWidgetItem *item = new QTableWidgetItem();
+                    item->setTextAlignment(Qt::AlignCenter);
 
                     if (k != 0)
                     {

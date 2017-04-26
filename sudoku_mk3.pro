@@ -35,4 +35,3 @@ FORMS    += mainwindow.ui
 DISTFILES += \
     sudokuTemplate.txt \
     sudokuTemplate_16.txt
-

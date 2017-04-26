@@ -38,17 +38,19 @@
    <widget class="QPushButton" name="checkButton">
     <property name="geometry">
      <rect>
-      <x>690</x>
-      <y>190</y>
-      <width>161</width>
-      <height>51</height>
+      <x>680</x>
+      <y>250</y>
+      <width>181</width>
+      <height>71</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Copperplate</family>
+      <family>Avenir</family>
       <pointsize>24</pointsize>
-      <italic>false</italic>
+      <weight>75</weight>
+      <italic>true</italic>
+      <bold>true</bold>
      </font>
     </property>
     <property name="text">
@@ -58,17 +60,19 @@
    <widget class="QPushButton" name="hintButton">
     <property name="geometry">
      <rect>
-      <x>690</x>
-      <y>240</y>
-      <width>161</width>
-      <height>51</height>
+      <x>680</x>
+      <y>320</y>
+      <width>181</width>
+      <height>71</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Copperplate</family>
+      <family>Avenir</family>
       <pointsize>24</pointsize>
-      <italic>false</italic>
+      <weight>75</weight>
+      <italic>true</italic>
+      <bold>true</bold>
      </font>
     </property>
     <property name="text">
@@ -78,19 +82,19 @@
    <widget class="QPushButton" name="newButton">
     <property name="geometry">
      <rect>
-      <x>690</x>
+      <x>680</x>
       <y>40</y>
-      <width>161</width>
-      <height>51</height>
+      <width>181</width>
+      <height>71</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Copperplate</family>
+      <family>Avenir</family>
       <pointsize>24</pointsize>
-      <weight>50</weight>
-      <italic>false</italic>
-      <bold>false</bold>
+      <weight>75</weight>
+      <italic>true</italic>
+      <bold>true</bold>
      </font>
     </property>
     <property name="text">
@@ -100,14 +104,14 @@
    <widget class="QSlider" name="hardLevelSlider">
     <property name="geometry">
      <rect>
-      <x>700</x>
-      <y>570</y>
+      <x>680</x>
+      <y>540</y>
       <width>171</width>
       <height>31</height>
      </rect>
     </property>
     <property name="minimum">
-     <number>2</number>
+     <number>5</number>
     </property>
     <property name="maximum">
      <number>50</number>
@@ -119,7 +123,7 @@
      <number>5</number>
     </property>
     <property name="value">
-     <number>2</number>
+     <number>5</number>
     </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
@@ -134,17 +138,19 @@
    <widget class="QLabel" name="hardLevelLabel">
     <property name="geometry">
      <rect>
-      <x>700</x>
-      <y>600</y>
+      <x>680</x>
+      <y>590</y>
       <width>171</width>
       <height>41</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Copperplate</family>
+      <family>Avenir</family>
       <pointsize>25</pointsize>
-      <italic>false</italic>
+      <weight>75</weight>
+      <italic>true</italic>
+      <bold>true</bold>
      </font>
     </property>
     <property name="text">
@@ -157,17 +163,19 @@
    <widget class="QPushButton" name="clearButton">
     <property name="geometry">
      <rect>
-      <x>690</x>
-      <y>290</y>
-      <width>161</width>
-      <height>51</height>
+      <x>680</x>
+      <y>390</y>
+      <width>181</width>
+      <height>71</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Copperplate</family>
+      <family>Avenir</family>
       <pointsize>24</pointsize>
-      <italic>false</italic>
+      <weight>75</weight>
+      <italic>true</italic>
+      <bold>true</bold>
      </font>
     </property>
     <property name="text">
@@ -346,8 +354,8 @@
       </property>
       <property name="font">
        <font>
-        <family>Arial Black</family>
-        <pointsize>18</pointsize>
+        <family>Avenir</family>
+        <pointsize>24</pointsize>
         <weight>75</weight>
         <bold>true</bold>
        </font>
@@ -457,241 +465,385 @@
        </property>
       </item>
       <item row="0" column="1">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="0" column="2">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="0" column="3">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="0" column="4">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="0" column="5">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="0" column="6">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="0" column="7">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="0" column="8">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="1" column="0">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="1" column="1">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="1" column="2">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="1" column="3">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="1" column="4">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="1" column="5">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="1" column="6">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="1" column="7">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="1" column="8">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="2" column="0">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="2" column="1">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="2" column="2">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="2" column="3">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="2" column="4">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="2" column="5">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="2" column="6">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="2" column="7">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="2" column="8">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="3" column="0">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="3" column="1">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="3" column="2">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="3" column="3">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="3" column="4">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="3" column="5">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="3" column="6">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="3" column="7">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="3" column="8">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="4" column="0">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="4" column="1">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="4" column="2">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="4" column="3">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="4" column="4">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="4" column="5">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="4" column="6">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="4" column="7">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="4" column="8">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="5" column="0">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="5" column="1">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="5" column="2">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="5" column="3">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
@@ -705,96 +857,153 @@
        </property>
       </item>
       <item row="5" column="5">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="5" column="6">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="5" column="7">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="5" column="8">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="6" column="0">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="6" column="1">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="6" column="2">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="6" column="3">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="6" column="4">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="6" column="5">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="6" column="6">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="6" column="7">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="6" column="8">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="7" column="0">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="7" column="1">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="7" column="2">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="7" column="3">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="7" column="4">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="7" column="5">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
@@ -808,56 +1017,89 @@
        </property>
       </item>
       <item row="7" column="7">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="7" column="8">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="8" column="0">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="8" column="1">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="8" column="2">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="8" column="3">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="8" column="4">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="8" column="5">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="8" column="6">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="8" column="7">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
       </item>
       <item row="8" column="8">
+       <property name="text">
+        <string/>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
@@ -1062,8 +1304,8 @@
       </property>
       <property name="font">
        <font>
-        <family>Arial</family>
-        <pointsize>18</pointsize>
+        <family>Avenir</family>
+        <pointsize>24</pointsize>
         <weight>75</weight>
         <bold>true</bold>
        </font>
@@ -1092,8 +1334,8 @@
       </property>
       <property name="font">
        <font>
-        <family>Arial</family>
-        <pointsize>18</pointsize>
+        <family>Avenir</family>
+        <pointsize>24</pointsize>
         <weight>75</weight>
         <bold>true</bold>
        </font>
@@ -1119,8 +1361,8 @@
       </property>
       <property name="font">
        <font>
-        <family>Arial</family>
-        <pointsize>18</pointsize>
+        <family>Avenir</family>
+        <pointsize>24</pointsize>
         <weight>75</weight>
         <bold>true</bold>
        </font>
@@ -1146,8 +1388,8 @@
       </property>
       <property name="font">
        <font>
-        <family>Arial</family>
-        <pointsize>18</pointsize>
+        <family>Avenir</family>
+        <pointsize>24</pointsize>
         <weight>75</weight>
         <bold>true</bold>
        </font>
@@ -1179,8 +1421,8 @@
       </property>
       <property name="font">
        <font>
-        <family>Arial</family>
-        <pointsize>18</pointsize>
+        <family>Avenir</family>
+        <pointsize>24</pointsize>
         <weight>75</weight>
         <bold>true</bold>
        </font>
@@ -1206,8 +1448,8 @@
       </property>
       <property name="font">
        <font>
-        <family>Arial</family>
-        <pointsize>18</pointsize>
+        <family>Avenir</family>
+        <pointsize>24</pointsize>
         <weight>75</weight>
         <bold>true</bold>
        </font>
@@ -1233,8 +1475,8 @@
       </property>
       <property name="font">
        <font>
-        <family>Arial</family>
-        <pointsize>18</pointsize>
+        <family>Avenir</family>
+        <pointsize>24</pointsize>
         <weight>75</weight>
         <bold>true</bold>
        </font>
@@ -1260,8 +1502,8 @@
       </property>
       <property name="font">
        <font>
-        <family>Arial</family>
-        <pointsize>18</pointsize>
+        <family>Avenir</family>
+        <pointsize>24</pointsize>
         <weight>75</weight>
         <bold>true</bold>
        </font>
@@ -1287,8 +1529,8 @@
       </property>
       <property name="font">
        <font>
-        <family>Arial</family>
-        <pointsize>18</pointsize>
+        <family>Avenir</family>
+        <pointsize>24</pointsize>
         <weight>75</weight>
         <bold>true</bold>
        </font>
@@ -1317,7 +1559,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Arial</family>
+        <family>Avenir</family>
         <pointsize>24</pointsize>
         <weight>75</weight>
         <italic>false</italic>
@@ -1371,6 +1613,14 @@
        <property name="text">
         <string>1</string>
        </property>
+       <property name="font">
+        <font>
+         <family>Avenir</family>
+         <pointsize>24</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
        </property>
@@ -1393,7 +1643,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Arial</family>
+         <family>Avenir</family>
          <pointsize>24</pointsize>
          <weight>75</weight>
          <bold>true</bold>
@@ -1409,7 +1659,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Arial</family>
+         <family>Avenir</family>
          <pointsize>24</pointsize>
          <weight>75</weight>
          <bold>true</bold>
@@ -1425,7 +1675,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Arial</family>
+         <family>Avenir</family>
          <pointsize>24</pointsize>
          <weight>75</weight>
          <bold>true</bold>
@@ -1441,7 +1691,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Arial</family>
+         <family>Avenir</family>
          <pointsize>24</pointsize>
          <weight>75</weight>
          <bold>true</bold>
@@ -1457,7 +1707,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Arial</family>
+         <family>Avenir</family>
          <pointsize>24</pointsize>
          <weight>75</weight>
          <bold>true</bold>
@@ -1473,7 +1723,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Arial</family>
+         <family>Avenir</family>
          <pointsize>24</pointsize>
          <weight>75</weight>
          <bold>true</bold>
@@ -1489,7 +1739,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Arial</family>
+         <family>Avenir</family>
          <pointsize>24</pointsize>
          <weight>75</weight>
          <bold>true</bold>
@@ -1505,7 +1755,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Arial</family>
+         <family>Avenir</family>
          <pointsize>24</pointsize>
          <weight>75</weight>
          <bold>true</bold>
@@ -1650,7 +1900,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Arial Black</family>
+        <family>Avenir</family>
         <pointsize>18</pointsize>
         <weight>75</weight>
         <bold>true</bold>
@@ -2427,7 +2677,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Arial</family>
+        <family>Avenir</family>
         <pointsize>18</pointsize>
         <weight>75</weight>
         <bold>true</bold>
@@ -2486,7 +2736,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Arial</family>
+         <family>Avenir</family>
          <pointsize>18</pointsize>
          <weight>75</weight>
          <bold>true</bold>
@@ -2505,7 +2755,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Arial</family>
+         <family>Avenir</family>
          <pointsize>18</pointsize>
          <weight>75</weight>
          <bold>true</bold>
@@ -2524,7 +2774,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Arial</family>
+         <family>Avenir</family>
          <pointsize>18</pointsize>
          <weight>75</weight>
          <bold>true</bold>
@@ -2543,7 +2793,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Arial</family>
+         <family>Avenir</family>
          <pointsize>18</pointsize>
          <weight>75</weight>
          <bold>true</bold>
@@ -2562,7 +2812,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Arial</family>
+         <family>Avenir</family>
          <pointsize>18</pointsize>
          <weight>75</weight>
          <bold>true</bold>
@@ -2581,7 +2831,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Arial</family>
+         <family>Avenir</family>
          <pointsize>18</pointsize>
          <weight>75</weight>
          <bold>true</bold>
@@ -2600,7 +2850,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Arial</family>
+         <family>Avenir</family>
          <pointsize>18</pointsize>
          <weight>75</weight>
          <bold>true</bold>
@@ -2619,7 +2869,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Arial</family>
+         <family>Avenir</family>
          <pointsize>18</pointsize>
          <weight>75</weight>
          <bold>true</bold>
@@ -2638,7 +2888,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Arial</family>
+         <family>Avenir</family>
          <pointsize>18</pointsize>
          <weight>75</weight>
          <bold>true</bold>
@@ -2657,7 +2907,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Arial</family>
+         <family>Avenir</family>
          <pointsize>18</pointsize>
          <weight>75</weight>
          <bold>true</bold>
@@ -2676,7 +2926,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Arial</family>
+         <family>Avenir</family>
          <pointsize>18</pointsize>
          <weight>75</weight>
          <bold>true</bold>
@@ -2695,7 +2945,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Arial</family>
+         <family>Avenir</family>
          <pointsize>18</pointsize>
          <weight>75</weight>
          <bold>true</bold>
@@ -2714,7 +2964,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Arial</family>
+         <family>Avenir</family>
          <pointsize>18</pointsize>
          <weight>75</weight>
          <bold>true</bold>
@@ -2733,7 +2983,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Arial</family>
+         <family>Avenir</family>
          <pointsize>18</pointsize>
          <weight>75</weight>
          <bold>true</bold>
@@ -2752,7 +3002,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Arial</family>
+         <family>Avenir</family>
          <pointsize>18</pointsize>
          <weight>75</weight>
          <bold>true</bold>
@@ -2771,7 +3021,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Arial</family>
+         <family>Avenir</family>
          <pointsize>18</pointsize>
          <weight>75</weight>
          <bold>true</bold>
@@ -2796,7 +3046,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Arial</family>
+        <family>Avenir</family>
         <pointsize>18</pointsize>
         <weight>75</weight>
         <bold>true</bold>
@@ -2823,7 +3073,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Arial</family>
+        <family>Avenir</family>
         <pointsize>18</pointsize>
         <weight>75</weight>
         <bold>true</bold>
@@ -2850,7 +3100,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Arial</family>
+        <family>Avenir</family>
         <pointsize>18</pointsize>
         <weight>75</weight>
         <bold>true</bold>
@@ -2877,7 +3127,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Arial</family>
+        <family>Avenir</family>
         <pointsize>18</pointsize>
         <weight>75</weight>
         <bold>true</bold>
@@ -2904,7 +3154,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Arial</family>
+        <family>Avenir</family>
         <pointsize>18</pointsize>
         <weight>75</weight>
         <bold>true</bold>
@@ -2931,7 +3181,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Arial</family>
+        <family>Avenir</family>
         <pointsize>18</pointsize>
         <weight>75</weight>
         <bold>true</bold>
@@ -2958,7 +3208,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Arial</family>
+        <family>Avenir</family>
         <pointsize>18</pointsize>
         <weight>75</weight>
         <bold>true</bold>
@@ -2985,7 +3235,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Arial</family>
+        <family>Avenir</family>
         <pointsize>18</pointsize>
         <weight>75</weight>
         <bold>true</bold>
@@ -3012,7 +3262,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Arial</family>
+        <family>Avenir</family>
         <pointsize>18</pointsize>
         <weight>75</weight>
         <bold>true</bold>
@@ -3039,7 +3289,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Arial</family>
+        <family>Avenir</family>
         <pointsize>18</pointsize>
         <weight>75</weight>
         <bold>true</bold>
@@ -3066,7 +3316,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Arial</family>
+        <family>Avenir</family>
         <pointsize>18</pointsize>
         <weight>75</weight>
         <bold>true</bold>
@@ -3093,7 +3343,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Arial</family>
+        <family>Avenir</family>
         <pointsize>18</pointsize>
         <weight>75</weight>
         <bold>true</bold>
@@ -3120,7 +3370,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Arial</family>
+        <family>Avenir</family>
         <pointsize>18</pointsize>
         <weight>75</weight>
         <bold>true</bold>
@@ -3147,7 +3397,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Arial</family>
+        <family>Avenir</family>
         <pointsize>18</pointsize>
         <weight>75</weight>
         <bold>true</bold>
@@ -3174,7 +3424,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Arial</family>
+        <family>Avenir</family>
         <pointsize>18</pointsize>
         <weight>75</weight>
         <bold>true</bold>
@@ -3201,7 +3451,7 @@
       </property>
       <property name="font">
        <font>
-        <family>Arial</family>
+        <family>Avenir</family>
         <pointsize>18</pointsize>
         <weight>75</weight>
         <bold>true</bold>
@@ -3222,19 +3472,19 @@
    <widget class="QPushButton" name="saveButton">
     <property name="geometry">
      <rect>
-      <x>690</x>
-      <y>90</y>
-      <width>161</width>
-      <height>51</height>
+      <x>680</x>
+      <y>110</y>
+      <width>181</width>
+      <height>71</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Copperplate</family>
+      <family>Avenir</family>
       <pointsize>24</pointsize>
-      <weight>50</weight>
-      <italic>false</italic>
-      <bold>false</bold>
+      <weight>75</weight>
+      <italic>true</italic>
+      <bold>true</bold>
      </font>
     </property>
     <property name="text">
@@ -3244,19 +3494,19 @@
    <widget class="QPushButton" name="loadButton">
     <property name="geometry">
      <rect>
-      <x>690</x>
-      <y>140</y>
-      <width>161</width>
-      <height>51</height>
+      <x>680</x>
+      <y>180</y>
+      <width>181</width>
+      <height>71</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Copperplate</family>
+      <family>Avenir</family>
       <pointsize>24</pointsize>
-      <weight>50</weight>
-      <italic>false</italic>
-      <bold>false</bold>
+      <weight>75</weight>
+      <italic>true</italic>
+      <bold>true</bold>
      </font>
     </property>
     <property name="text">
