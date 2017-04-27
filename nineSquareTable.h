@@ -27,7 +27,7 @@ public:
     int        sudokuCheck   ();
     int        sudokuNums    ();
     int        sudokuSolve   ();
-    int        sudokuSquare  ();
+    //int        sudokuSquare  ();
     int        sudokuPrint   ();
     int        sudokuDtor    ();
     int        sudokuCopy    (nineTable* from, nineTable* to);

@@ -84,6 +84,7 @@ int nineTable::sudokuSwap ()    //особый путь перемешивани
         int ver_hor_rand =  rand();
         ver_hor_rand     %= 2;
         if (ver_hor_rand) sudokuTrans ();
+        sudokuShuffle();
         first  =  rand();
         first  %= this->bodySize;
         first  += 1;
@@ -499,6 +500,7 @@ int nineDatabase::renderingSolutions (nineTable* This)  //генерация р�
 int nineDatabase::fastRenderingSolutions (nineTable* This)  //генерация решений - сначала простым методом, затем перебор. все решения записываются в database
 {                                                           //новизна функции в отсеивании уже на этапе, когда нашлось хотя бы два решения
     This->sudokuSolve();
+
     for (int i = 0; i < This->bodySize; i++)
     {
         for (int j = 0; j < This->bodySize; j++)
@@ -578,7 +580,6 @@ int nineTable::sudokuGen (int* level)   //генерация поля судок
         if (res != 1)
         {
             collisions++;
-            
         }
         else
         {
@@ -588,7 +589,8 @@ int nineTable::sudokuGen (int* level)   //генерация поля судок
         itemstoelem.erase(itemstoelem.begin()+i);
         if (itemstoelem.size()==0) break;
     }
-    sudokuShuffle ();
+    sudokuShuffle();
+    sudokuSwap();
     return 0;
 }
 
@@ -599,10 +601,11 @@ int nineTable::sudokuClear() //очистка судоку
         
         for (int j = 0; j < this->bodySize; j++)
         {
-            while (this->body[i][j].size() > 0)
+            this->body[i][j].clear();
+            /*while (this->body[i][j].size() > 0)
             {
                 this->body[i][j].pop_back();
-            }
+            }*/
 
         }
     }

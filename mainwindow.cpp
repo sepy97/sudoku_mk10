@@ -58,7 +58,9 @@ void MainWindow::on_newButton_clicked()
                 ui->sudokuWidget->setItem (i, j, item);
             }
         }
-        newtbl->sudokuGen (&hardlevel);
+
+        int tmplevel = (int)(hardlevel*60/ui->hardLevelSlider->maximum()) + 15;
+        newtbl->sudokuGen (&tmplevel);
         restbl->sudokuCopy(newtbl, restbl);
 
         for (int i = 0; i < newtbl->bodySize; i++)
@@ -104,7 +106,7 @@ void MainWindow::on_newButton_clicked()
                 ui->sudokuWidget_16->setItem (i, j, item);
             }
         }
-        int tmplevel = (int)(hardlevel*100/ui->hardLevelSlider->maximum());
+        int tmplevel = (int)(hardlevel*130/ui->hardLevelSlider->maximum()) + 5;
         newtbl_16->sudokuGen (&tmplevel);
         restbl_16->sudokuCopy(newtbl_16, restbl_16);
 
@@ -533,7 +535,7 @@ void MainWindow::on_checkButton_clicked()
    if (ui->tabWidget->currentIndex() == 0)
    {
        bool wrong = false;
-       //newbase.renderingSolutions (&newtbl);
+
        if (newbase->SDbSize == 1)
        {
            for (int i = 0; i < newtbl->bodySize; i++)
